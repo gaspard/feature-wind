@@ -1,6 +1,7 @@
+import { useState } from 'react'
 import './App.css'
+// import { article } from './content/article/2024/0515-rosen-1.3/index.md'
 import { Raw } from './Markdown'
-import data from './content/article/2024/0515-rosen-1.3/index.md'
 import './css/prism-light.css'
 import './css/style.css'
 import './css/typography.css'
@@ -20,18 +21,39 @@ const tabs = [
   { title: 'Test', path: 'test', section: 'two', position: 1, url: 'foo/test' },
 ]
 
-const articles = import.meta.glob('./content/**/*.md') as {
-  [key: string]: () => Promise<any>
+const articles = import.meta.glob('./content/**/*.md', {
+  query: 'matter',
+  eager: true,
+}) as {
+  [key: string]: {
+    matter: any
+  }
+}
+
+const full_articles = import.meta.glob('./content/**/*.md') as {
+  [key: string]: () => Promise<{
+    article: {
+      html: string
+    }
+  }>
 }
 
 console.log(articles)
 for (const path in articles) {
-  articles[path]().then(({ default: { tags, title } }) => {
-    console.log(path, tags, title)
-  })
+  const { matter } = articles[path]
+  console.log(path, matter)
 }
 console.log(articles)
+const path = './content/article/2024/0515-rosen-1.3/index.md'
 export function App() {
+  const [html, setHtml] = useState('')
+
+  if (html === '') {
+    full_articles[path]().then(({ article }) => {
+      console.log(article)
+      setHtml(article.html)
+    })
+  }
   return (
     <>
       <header>
@@ -52,7 +74,7 @@ export function App() {
           <main>
             <article>
               <div className="main-content">
-                <Raw html={data.html} />
+                <Raw html={html} />
               </div>
             </article>
           </main>

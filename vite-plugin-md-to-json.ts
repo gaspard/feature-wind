@@ -1,10 +1,9 @@
 // vite-plugin-md-to-json.js
 import markdownItKatex from '@iktakahiro/markdown-it-katex'
-import fs from 'fs'
 import matter from 'gray-matter'
 import markdownIt from 'markdown-it'
 import markdownItAttrs from 'markdown-it-attrs'
-import path from 'path'
+import { Plugin } from 'vite'
 
 const katexOptions = {
   macros: {
@@ -28,22 +27,24 @@ const md = new markdownIt({
 md.use(markdownItKatex, katexOptions)
 md.use(markdownItAttrs, attrsOptions)
 
-export function vitePluginMdToJson() {
+const mdFileRe = /\.md(\?(.*)|)$/
+export function vitePluginMdToJson(): Plugin {
   return {
     name: 'md-to-json',
-    buildStart() {
-      console.log('start')
-      // Ensure the output directory exists
-      if (!fs.existsSync('dist')) {
-        fs.mkdirSync('dist')
-      }
-    },
     transform(code, id) {
-      if (id.endsWith('.md')) {
-        console.log(id)
+      const re = mdFileRe.exec(id)
+      if (re) {
         const { data, content } = matter(code)
-        const html = md.render(content)
-        return `export default ${JSON.stringify({ ...data, html }, null, 2)}`
+        if (re[2] === 'matter') {
+          return `export const matter = ${JSON.stringify(data, null, 2)}`
+        } else {
+          const html = md.render(content)
+          return `export const article = ${JSON.stringify(
+            { ...data, html },
+            null,
+            2
+          )}`
+        }
       }
     },
   }
