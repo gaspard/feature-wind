@@ -1,0 +1,32 @@
+{% if tags[0] != "nav" %}
+  <prev-next>
+    {% assign previousarticle = collections[tags[0]] | reverse | getPreviousCollectionItem %}
+    {% assign nextarticle = collections[tags[0]] | reverse | getNextCollectionItem %}
+    {% if previousarticle %}
+      <prev-next-item>
+        <a href="{{ previousarticle.url }}">&leftarrow;</a>
+      </prev-next-item>
+    {% else %}
+      <prev-next-item>
+        <a href="/{{ tags[0] }}/">&lArr; &nbsp;</a>
+      </prev-next-item>
+    {% endif %}
+    {% if nextarticle %}
+      <prev-next-item>
+        <a href="{{ nextarticle.url }}">&rightarrow;</a>
+      </prev-next-item>
+    {% endif %}
+  </prev-next>
+{% else if collections[section] %}
+  {% if page.url != "/" %}
+    <prev-next-item>
+      <a href="/">&lArr;</a>
+    </prev-next-item>
+  {% endif %}
+  {% assign firstArticle = collections[section] | reverse | first %}
+  {% if firstArticle %}
+    <prev-next-item>
+      <a href="{{ firstArticle.url }}">&rightarrow;</a>
+    </prev-next-item>
+  {% endif %}
+{% endif %}

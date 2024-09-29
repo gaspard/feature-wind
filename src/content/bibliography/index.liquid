@@ -1,0 +1,29 @@
+---
+tags: nav
+section: bibliography
+title: bibliography
+position: 90
+layout: layout.liquid
+---
+<bib-list>
+  {% assign bib_list = collections[section] | reverse %}
+  {%- for bib in bib_list -%}
+    <bib-entry>
+      <bib-cover>
+        <a href='{{ bib.url }}'>
+          {% cover bib %}
+        </a>
+      </bib-cover>
+      <bib-item>
+        <bib-title>
+          <a href='{{ bib.url }}'>{{ bib.data.title }}</a>
+        </bib-title>
+        <bib-info>
+          <bib-author>{{ bib.data.author }}</bib-author>
+          <bib-year>{{ bib.data.year }}</bib-year>
+        </bib-info>
+        <bib-summary>{{ bib.data.summary | markdown }}</bib-summary>
+      </bib-item>
+    </bib-entry>
+  {%- endfor -%}
+</bib-list>

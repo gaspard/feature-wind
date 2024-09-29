@@ -1,0 +1,25 @@
+---
+tags: nav
+section: article
+title: articles
+position: 0
+layout: layout.liquid
+---
+<article-list>
+  {% assign articles = collections[section] | reverse %}
+  {%- for article in articles -%}
+    <article-entry>
+      <article-cover>
+        <a href='{{ article.url }}'>
+          {% cover article %}
+        </a>
+      </article-cover>
+      <article-item>
+        <article-title>
+          <a href='{{ article.url }}'>{{ article.data.title }}</a>
+        </article-title>
+        <article-date>{{ article.data.date | readableDate }}</article-date>
+      </article-item>
+    </article-entry>
+  {%- endfor -%}
+</article-list>

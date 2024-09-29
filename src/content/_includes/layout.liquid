@@ -1,0 +1,56 @@
+<!doctype html>
+
+<head>
+  <meta charset="utf-8">
+  <title>{{ blog.name }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Sevillana&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Sevillana&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Slab:wght@100..900&family=Sevillana&display=swap" rel="stylesheet">
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css"
+    integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww"
+    crossorigin="anonymous">
+
+  <link rel="stylesheet" href="{{ '/css/typography.css' | url }}">
+  <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
+  <link rel="stylesheet" href="{{ '/css/tailwind.gen.css' | url }}">
+  <link rel="stylesheet" href="{{ '/css/prism-light.css' | url }}">
+</head>
+
+<body>
+  <header>
+
+    <blog-name>
+      <a href='/'>{{ blog.name }}</a>
+    </blog-name>
+    <nav>
+      {% assign tabs = collections["nav"] | sort: "data.position" %}
+      {%- for tab in tabs -%}
+        <nav-link title="{{ tab.data.title }}" class="{% if tab.url == page.url %}high{% endif %} {% if tags[0] == tab.data.section %}section{% endif %}">
+          <a href='{{ tab.url }}'>{{ tab.data.title }}</a>
+        </nav-link>
+      {%- endfor -%}
+      {% include 'prev-next.liquid' %}
+    </nav>
+  </header>
+  <page-main>
+    <page-inner>
+      <main>
+        {{ content }}
+      </main>
+      <aside>
+        {% include 'latest.liquid' %}
+      </aside>
+    </page-inner>
+  </page-main>
+</body>

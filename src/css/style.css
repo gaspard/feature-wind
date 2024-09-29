@@ -1,0 +1,299 @@
+
+@font-face {
+  font-family: 'Titillium';
+  src: url('/assets/fonts/Titillium_Web/TitilliumWeb-Regular.ttf');
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'Titillium';
+  src: url('/assets/fonts/Titillium_Web/TitilliumWeb-SemiBold.ttf');
+  font-style: normal;
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'Titillium';
+  src: url('/assets/fonts/Titillium_Web/TitilliumWeb-Bold.ttf');
+  font-style: normal;
+  font-weight: 800;
+}
+
+body {
+  text-align: left;
+  margin: 0;
+  max-width: none;
+}
+
+p,
+p + p {
+  text-indent: 1.3rem;
+}
+
+.blog-name {
+  display: block;
+  color: #ccc;
+  font-family: "Sevillana"
+  , cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2.5rem;
+}
+
+.blog-name a,
+.blog-name a:link,
+.blog-name a:visited {
+  color: inherit;
+}
+
+nav {
+  color: #ccc;
+  display: flex;
+}
+
+nav a:visited,
+nav a {
+  color: inherit;
+  font-weight: inherit;
+}
+
+.nav-link {
+  font-size: 1.2rem;
+  margin-right: 10px;
+}
+
+.nav-link::after {
+  display: block;
+  content: attr(title);
+  font-weight: bold;
+  height: 1px;
+  color: transparent;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.nav-link.section {
+  font-weight: bold;
+}
+
+.nav-link.high {
+  color: #444;
+  font-weight: bold;
+}
+
+.page-main {
+  margin-top: 2rem;
+  display: block;
+}
+
+.page-iner {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+main {
+  padding: 0 3rem 0 1rem;
+  flex-grow: 1;
+  max-width: 40rem;
+  width: 40rem;
+}
+
+article {
+  display: block;
+  color:hsl(0, 0%, 20%);
+}
+
+article img {
+  display: table;
+  margin: auto;
+  max-width: 70%;
+  height: auto;
+}
+
+article-list,
+bib-list {
+  display: flex;
+  flex-direction: column;
+}
+
+article-entry,
+bib-entry {
+  display: flex;
+  margin: 1rem 0;
+  flex-direction: row;
+}
+
+article-cover,
+bib-cover {
+  display: block;
+  margin: 0 1rem 0 0;
+  flex: 0 0 90px;
+}
+
+article-item,
+bib-item {
+  display: flex;
+  flex-direction: column;
+}
+
+article-title,
+bib-title {
+  font-size: 80%;
+  font-weight: bold;
+  color: #444;
+}
+
+article-date,
+bib-date {
+  font-size: 70%;
+  color: #ccc;
+}
+
+bib-info {
+  color: #777;
+  font-size: 70%;
+}
+
+bib-author {
+  font-weight: bold;
+}
+
+bib-year:before {
+  content: '- ';
+  color: #aaa;
+}
+
+bib-summary {
+  margin-top: 0.8em;
+  color: #999;
+  font-size: 80%;
+}
+
+bib-summary p {
+  display: inline;
+}
+
+aside {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #ddd;
+  padding-left: 1rem;
+  flex-grow: 1;
+  width: 20rem;
+  max-width: 25rem;
+}
+
+prev-next {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+  color: #aaa;
+}
+
+latest-articles {
+  display: flex;
+  flex-direction: column;
+  align-content: start;
+  justify-content: start;
+}
+
+prev-next-header,
+latest-header {
+  display: block;
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+latest-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+latest-title,
+latest-date,
+latest-summary {
+  color: #aaa;
+  display: block;
+}
+
+latest-date {
+  color: #ccc;
+  font-size: 80%;
+}
+
+latest-title {
+  color: #888;
+}
+
+latest-title p {
+  display: inline;
+}
+
+h1,
+h2,
+h3,
+h4
+{
+  text-align: center;
+  color:hsl(0, 0%, 30%);
+}
+
+h1 em,
+h2 em,
+h3 em,
+h4 em,
+h5 em,
+latest-title em {
+  font-weight: normal;
+}
+
+.main-content p>.katex-display, .main-content p>.katex-error {
+  display: block;
+  margin: 1em 0;
+  text-indent: 0;
+}
+
+p>.katex-error {
+  display: block;
+  color: hsl(0, 0%, 60%)!important;
+  border: 1px solid red;
+  border-radius: 2px;
+}
+
+p>.katex-error::after {
+  color: hsl(0, 80%, 30%)!important;
+  margin-top: 10px;
+  padding: 3px;
+  display: block;
+  content: attr(title);
+  background: hsl(0, 30%, 90%);
+}
+
+.main-content .katex {
+  font-size: 100%;
+}
+
+.main-content blockquote {
+  font-style: italic;
+}
+
+.main-content a:hover {
+  font-weight: normal;
+  color: hsl(200, 80%, 45%);
+}
+
+@media print {
+  html, body {
+    width: 210mm;
+    height: 297mm;
+  }
+  aside, nav {
+    display: none;
+  }
+  /* ... the rest of the rules ... */
+}
+
+@media (max-width:700px) {
+  aside {display:none;} /* TODO: move at the bottom instead. */
+}

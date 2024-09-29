@@ -1,0 +1,13 @@
+{% assign articles = collections["article"] | sort: "article.data.date" | reverse %}
+<latest-articles>
+  <latest-header>Latest articles</latest-header>
+  {%- for article in articles -%}
+    <latest-item>
+      <latest-title>
+        <a href='{{ article.url }}'>{{ article.data.title | markdown }}</a>
+      </latest-title>
+      <latest-date>{{ article.data.date | readableDate }}</latest-date>
+      <latest-summary>{{ article.data.summary }}</latest-summary>
+    </latest-item>
+  {%- endfor -%}
+</latest-articles>
